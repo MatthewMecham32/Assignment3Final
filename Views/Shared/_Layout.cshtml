@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Movie Database</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <a asp-action="MyPodcasts">My Podcasts</a>
+    <a asp-action="EnterMovie">Enter Movie</a>
+    <a asp-action="MovieList">Movie List</a>
+    <a asp-action="Index">Home Page</a>
+</head>
+<body>
+    <h1>@ViewBag.Title</h1>
+
+    @RenderBody()
+
+    <br />
+    <br />
+    <br />
+    <footer>This worked</footer>
+</body>    
+</html>

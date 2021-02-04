@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Movie " + Model.Title + " Entered" ;
+}
+
+@model Assignment3Final.Models.AppResponse;
+
+<div>
+    <h3>Your movie has been entered in the database</h3>
+</div>
+
+<div>
+    <a asp-action="MovieList">Click here to see the entire list</a>
+</div>
