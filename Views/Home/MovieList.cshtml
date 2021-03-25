@@ -5,31 +5,33 @@
     ViewBag.Title = "Movie List";
 }
 
-@model IEnumerable<Assignment3Final.Models.AppResponse>
+@model MovieListViewModel
 
 <div>
     <h2>Joel's Movie List</h2>
 
-    <table>
+    <table class="table table-bordered table-striped">
+
         <thead>
-            <tr><th>Category</th><th>Title</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent To</th><th>Notes</th></tr>
+            <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Year</th>
+                <th>Rating</th>
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delte</th>
+            </tr>
         </thead>
 
-        <tbody>
-            @foreach (Assignment3Final.Models.AppResponse x in Model)
+
+        <div class="text-center">
+            @foreach (var x in Model.Movies)
             {
-                <tr>
-                    <td>@x.Category</td>
-                    <td>@x.Title</td>
-                    <td>@x.Year</td>
-                    <td>@x.Director</td>
-                    <td>@x.Rating</td>
-                    <td>@x.Edited</td>
-                    <td>@x.LentTo</td>
-                    <td>@x.Notes</td>
-                </tr>
+                <partial name="MovieSummary" model="x" />
             }
-        </tbody>
-    </table>
+        </div>
+        </table>
+
 
 </div>

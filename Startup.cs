@@ -1,10 +1,13 @@
+using Assignment3Final.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +26,14 @@ namespace Assignment3Final
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            services.AddDbContext<MovieDBContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:MovieConnection"]);
+            });
+
+            services.AddScoped<IMovieRepository, EFMovieRepository>();
+
             services.AddControllersWithViews();
         }
 
@@ -51,7 +62,12 @@ namespace Assignment3Final
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute("Edit",
+                "Edit",
+                new { Controller = "Home", action = "Edit" });
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }

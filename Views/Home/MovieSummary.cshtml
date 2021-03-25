@@ -1,0 +1,49 @@
+﻿<!--Is a partial view that brings the appointment information in for each available appointment in the signups page-->
+@model Movie
+
+
+
+    <tbody>
+
+        <tr>
+            <td class="text-left">@Model.Title</td>
+            <td class="text-center">@Model.Director</td>
+            <td>@Model.Year</td>
+            <td class="text-center">@Model.Rating</td>
+            <td class="text-right">@Model.Category</td>
+            <td>
+                <form id="@Model.Title" method="get" asp-action="Edit">
+                    <input type="hidden" asp-for="Title" />
+                    <input type="hidden" asp-for="Year" />
+                    <input type="hidden" asp-for="Director" />
+                    <input type="hidden" asp-for="Rating" />
+                    <input type="hidden" asp-for="Category" />
+                    <input type="hidden" asp-for="Edited" />
+                    <input type="hidden" asp-for="LentTo" />
+                    <input type="hidden" asp-for="Notes" />
+                    <input type="hidden" asp-for="MovieID" />
+
+                    <button asp-action="Edit" class="btn btn-sm btn-success">
+                        Edit
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form id="@Model.MovieID" method="post" asp-action="Delete">
+                    <input type="hidden" name="MovieId" asp-for="@Model.MovieID" />
+                    <input type="hidden" name="Title" asp-for="Title" />
+                    <input type="hidden" name="Year" asp-for="Year" />
+                    <input type="hidden" name="Director" asp-for="Director" />
+                    <input type="hidden" name="Rating" asp-for="Rating" />
+                    <input type="hidden" name="Category" asp-for="Category" />
+                    <input type="hidden" name="Edited" asp-for="Edited" />
+                    <input type="hidden" name="LentTo" asp-for="LentTo" />
+                    <input type="hidden" name="Notes" asp-for="Notes" />
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+
+    </tbody>

@@ -2,13 +2,15 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewBag.Title = "Movie " + Model.Title + " Entered" ;
+    ViewBag.Title = "Movie Entered or Deleted ";
+
 }
 
-@model Assignment3Final.Models.AppResponse;
+@model Assignment3Final.Models.Movie;
 
 <div>
-    <h3>Your movie has been entered in the database</h3>
+    <p>@ViewBag.Phrase</p>
+    <h3>Your movie has been Added or Deleted from the table</h3>
 </div>
 
 <div>

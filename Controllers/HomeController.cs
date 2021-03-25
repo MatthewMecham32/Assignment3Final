@@ -1,4 +1,5 @@
 ﻿using Assignment3Final.Models;
+using Assignment3Final.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,10 +13,14 @@ namespace Assignment3Final.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieDBContext _context;
+        private IMovieRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieDBContext context, IMovieRepository repository)
         {
+            _context = context;
             _logger = logger;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -35,11 +40,12 @@ namespace Assignment3Final.Controllers
         }
 
         [HttpPost]
-        public IActionResult EnterMovie(AppResponse appResponse)
+        public IActionResult EnterMovie(Movie appResponse)
         {
             if (ModelState.IsValid)
             {
-                TempStorage.AddEntry(appResponse);
+                _context.Add(appResponse);
+                _context.SaveChanges();
                 return View("Confirmation", appResponse);
             }
             else
@@ -51,7 +57,41 @@ namespace Assignment3Final.Controllers
 
         public IActionResult MovieList()
         {
-            return View(TempStorage.Entry.Where(r => r.Title != "Independence Day"));
+            return View(new MovieListViewModel
+            {
+                Movies = _repository.Movies
+                .Where(m => m.Title != "Independence Day")
+            });
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Edit(Movie appresponse)
+        {
+            return View(appresponse);
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult EditSubmit(Movie appresponse)
+        {
+            _context.Movies.Update(appresponse);
+            _context.SaveChanges();
+            return View("MovieList", new MovieListViewModel
+            {
+                Movies = _repository.Movies
+                .Where(m => m.Title != "Independence Day")
+            });
+        }
+
+        public IActionResult Delete(Movie appresponse)
+        {
+            _context.Movies.Remove(appresponse);
+            _context.SaveChanges();
+            return View("Confirmation");
         }
 
         public IActionResult Privacy()

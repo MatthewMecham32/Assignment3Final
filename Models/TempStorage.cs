@@ -7,11 +7,11 @@ namespace Assignment3Final.Models
 {
     public static class TempStorage
     {
-        private static List<AppResponse> entries = new List<AppResponse>();
+        private static List<Movie> entries = new List<Movie>();
 
-        public static IEnumerable<AppResponse> Entry => entries;
+        public static IEnumerable<Movie> Entry => entries;
 
-        public static void AddEntry(AppResponse entry)
+        public static void AddEntry(Movie entry)
         {
             entries.Add(entry);
         }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Assignment3Final.Models
 {
-    public class AppResponse
+    public class Movie
     {
-        [Required(ErrorMessage ="Category is a required field")]
-        public string Category { get; set; }
-
+        
+        [Key]
+        public int MovieID { get; set; }
         [Required(ErrorMessage = "Title is a required field")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage ="Category is a required field")]
+        public string Category { get; set; }
 
         [Required(ErrorMessage = "Year is a required field")]
         public int Year { get; set; }
